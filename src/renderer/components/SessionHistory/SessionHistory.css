@@ -1,0 +1,112 @@
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.session-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  background: rgba(71, 85, 105, 0.2);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.session-item:hover {
+  background: rgba(71, 85, 105, 0.3);
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.session-item.current-session {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.session-info {
+  flex: 1;
+}
+
+.session-badge {
+  background: #374151;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.session-badge.active {
+  background: #3b82f6;
+  animation: pulse 2s infinite;
+}
+
+.session-badge.completed {
+  background: #10b981;
+}
+
+.session-details {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.session-earnings {
+  text-align: right;
+  min-width: 100px;
+}
+
+.session-points {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.session-points.earning {
+  color: #10b981;
+  animation: pulse 2s infinite;
+}
+
+.session-points.earned {
+  color: #ffffff;
+}
+
+.session-status {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.empty-sessions {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .session-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .session-earnings {
+    text-align: left;
+    min-width: auto;
+  }
+}

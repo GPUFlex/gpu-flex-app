@@ -1,0 +1,109 @@
+.gpu-stats-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.gpu-stat {
+  margin-bottom: 20px;
+}
+
+.gpu-stat:last-child {
+  margin-bottom: 0;
+}
+
+.gpu-stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.gpu-stat-header span:first-child {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.gpu-stat-header span:last-child {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(71, 85, 105, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.gpu-stat-header i {
+  color: #8b5cf6;
+}
+
+.card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.card-header p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin: 4px 0 0 0;
+}
+
+.card-content {
+  padding: 24px;
+}
