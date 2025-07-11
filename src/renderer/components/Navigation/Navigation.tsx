@@ -18,6 +18,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: 'fas fa-tachometer-alt' },
     { id: 'home', label: 'Home', icon: 'fas fa-tachometer-alt' },
+    { id: 'login', label: 'Login', icon: 'fas fa-tachometer-alt' },
   ];
 
   return (
@@ -45,7 +46,7 @@ export const Navigation: React.FC<NavigationProps> = ({
       <div className="nav-user">
         <div className="points-display">
           <i className="fas fa-coins"></i>
-          <span>{user.totalEarnings.toLocaleString()}</span>
+          {/* <span>{user.totalEarnings.toLocaleString()}</span> */}
         </div>
         <div className="user-avatar">
           <img
