@@ -231,7 +231,11 @@
       "output": "release/build"
     },
     "extraResources": [
-      "./assets/**"
+      "./assets/**",
+      {
+        "from": "src/python/dist/worker",
+        "to": "python-backend/worker"
+      }
     ],
     "publish": {
       "provider": "github",

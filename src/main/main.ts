@@ -14,6 +14,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 
 class AppUpdater {
   constructor() {
@@ -111,6 +112,42 @@ const createWindow = async () => {
   // eslint-disable-next-line
   new AppUpdater();
 };
+let pythonProcess: ChildProcessWithoutNullStreams | null = null;
+
+const startPythonBackend = () => {
+  const isDev = !app.isPackaged;
+
+  const scriptPath = isDev
+    ? path.join(
+        __dirname,
+        '..',
+        '..',
+        'python',
+        'dist',
+        process.platform === 'win32' ? 'worker.exe' : 'worker',
+      )
+    : path.join(
+        process.resourcesPath,
+        'python-backend',
+        process.platform === 'win32' ? 'worker.exe' : 'worker',
+      );
+
+  console.log(`Starting backend from: ${scriptPath}`);
+
+  pythonProcess = spawn(scriptPath);
+
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(`[PYTHON] ${data.toString()}`);
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`[PYTHON ERROR] ${data.toString()}`);
+  });
+
+  pythonProcess.on('exit', (code) => {
+    console.log(`[PYTHON EXITED] code ${code}`);
+  });
+};
 
 /**
  * Add event listeners...
@@ -127,6 +164,7 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
+    startPythonBackend();
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
