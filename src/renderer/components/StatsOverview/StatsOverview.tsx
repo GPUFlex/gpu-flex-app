@@ -26,7 +26,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({
     {
       icon: 'fas fa-coins',
       label: 'Total Points',
-      value: user.totalEarnings.toLocaleString(),
+      value: user?.totalEarnings?.toLocaleString() ?? '',
       iconClass: 'coins',
     },
     {

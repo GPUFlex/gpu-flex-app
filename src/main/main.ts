@@ -14,6 +14,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import si from 'systeminformation';
+import { networkInterfaces } from 'os';
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 
 class AppUpdater {
@@ -25,6 +27,28 @@ class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+
+//todo use desktop libs to fetch gpu data
+// ipcMain.on('system:getGpuInfo', async (event) => {
+//   const gpus = await si.graphics();
+//   const gpu = gpus.controllers[0];
+//   event.reply('system:getGpuInfo:response', {
+//     model: gpu?.model || 'Unknown GPU',
+//     memory: gpu?.memoryTotal || 8192,
+//   });
+// });
+
+// ipcMain.handle('system:getLocalIp', () => {
+//   const nets = networkInterfaces();
+//   for (const name of Object.keys(nets)) {
+//     for (const net of nets[name] || []) {
+//       if (net.family === 'IPv4' && !net.internal) {
+//         return net.address;
+//       }
+//     }
+//   }
+//   return null;
+// });
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
@@ -79,6 +103,8 @@ const createWindow = async () => {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      // contextIsolation: true,
+      // nodeIntegration: false,
     },
   });
 
